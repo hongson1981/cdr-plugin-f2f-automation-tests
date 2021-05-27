@@ -14,15 +14,15 @@ def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func
 
 # Fixtures
 
-@pytest.fixture
-def browser():
-    # For this example, we will use Firefox
-    # You can change this fixture to use other browsers, too.
-    # A better practice would be to get browser choice from a config file.
-    b = webdriver.Firefox()
-    b.implicitly_wait(10)
-    yield b
-    b.quit()
+# @pytest.fixture
+# def browser():
+#     # For this example, we will use Firefox
+#     # You can change this fixture to use other browsers, too.
+#     # A better practice would be to get browser choice from a config file.
+#     b = webdriver.Firefox()
+#     b.implicitly_wait(10)
+#     yield b
+#     b.quit()
 
 
 # Shared Given Steps
