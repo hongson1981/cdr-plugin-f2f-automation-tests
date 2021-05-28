@@ -1,21 +1,18 @@
-import pytest
-from pytest_bdd import scenario, given, when, then
-import pdb
+#import pytest
+#from behave import scenario, given, when, then
+from behave import *
 import os
 import subprocess
-
 
 def system_out(command):
     p = subprocess.check_output(command, shell=True)
     return p.decode("utf-8")
 
 
-@given("that docker compose is up and running")
-def test_docker_check():
-    out = system_out('docker ps')
-    # docker_out = str(os.system('docker ps'))
-    pdb.set_trace()
-    assert out.find('')
+#@given("that docker compose is up and running")
+#def test_docker_check():
+#    out = system_out('docker ps')
+#    assert out.find('abuntu')
 
 # @when("the user runs docker ps")
 # def test_docker_check():
