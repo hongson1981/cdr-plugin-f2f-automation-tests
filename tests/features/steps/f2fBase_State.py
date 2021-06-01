@@ -1,6 +1,7 @@
 from behave import *
-import subprocess
 from asserts import assert_true, assert_equal, assert_raises
+import subprocess
+import requests
 
 
 def os_cmd(command):
@@ -26,32 +27,15 @@ def step_impl(context, port):
     """
     Use a CURL command to send a request to http://localhost:<port>
     """
-    flag = "'%{http_code}'"
-    print(port)
-    #context.cmd = os_cmd(f"curl -sw {flag} http://localhost:{port}")
-    context.cmd = os_cmd(f"curl -I http://localhost:{port}")
-    output = str(context.cmd)
-    type(output)
-    print(output)
-    result = output.find("HTTP/1.1 200 OK")
-    print(result)
-    print(type(result))
-    assert_true(result, msg_fmt=f'Expected {True} actual is {result}')
-    # Verify response from endpoint
+    context.cmd = requests.get(f"http://localhost:{port}")
+    print(context.cmd.status_code)
 
 
-@then("the user should receive a (?P<expected_code>.+) response from (?P<container>.+)(?P<actual_code>.+)")
-def step_impl(context, expected_code, container, actual_code):
+@then("the user should receive a (?P<expected_code>.+) response from (?P<container>.+)")
+def step_impl(context, expected_code, container):
     """
     :type context: behave.runner.Context
     :type expected_code: str
     :type container: str
-    :type actual_code: str
     """
-    output = str(context.cmd)
-    type(output)
-    print(output)
-    result = output.find("HTTP/1.1 200 OK")
-    print(result)
-    print(type(result))
-    assert_true(result, msg_fmt=f'Expected {True} actual is {result}')
+    assert_equal(int(expected_code), context.cmd.status_code, msg_fmt=f'Expected {expected_code} actual is {context.cmd.status_code}')

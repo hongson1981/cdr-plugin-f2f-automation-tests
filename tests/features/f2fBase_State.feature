@@ -6,15 +6,15 @@ Feature: Folder to Folder Base State
   Scenario Outline: User can access <container>
     Given that docker compose is up and running
     When the user sends a request to http://localhost:<port>
-    Then the user should receive a <expected_code> response from <container><actual_code>
+    Then the user should receive a <expected_code> response from <container>
     Examples: dockerContainers
-        | port | container | expected_code | actual_code |
-        | 1313 | UI        | 200          |              |
-        | 8880 | Swagger   | 200          |              |
-        | 5601 | Kibana    | 200          |              |
-        | 9000 | Minio     | 200          |              |
-        | 8888 | Jupyter   | 200          |              |
-        | 8866 | Voila     | 200          |              |
+        | port | container | expected_code |
+        | 8880 | Swagger   | 200          |
+        | 5601 | Kibana    | 200          |
+        | 9000 | Minio     | 200          |
+        | 1313 | UI        | 200          |
+        | 8888 | Jupyter   | 200          |
+        | 8866 | Voila     | 200          |
 
   Scenario: can view Processing Status
     Given Given that docker compose is up and running
