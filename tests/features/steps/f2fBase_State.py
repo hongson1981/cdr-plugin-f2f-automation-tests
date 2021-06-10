@@ -9,7 +9,7 @@ def os_cmd(command):
     return p.decode("utf-8")
 
 
-def request(method, url, body='null'):
+def request(method, url, body=None,headers=None):
     """
     :param method: Should be equal to 'GET' or 'POST'
     :param url: The url that will be called
@@ -18,16 +18,18 @@ def request(method, url, body='null'):
     a 'POST' request this function will return a string 'FAILED'. In your test step should assert that 'FAILED' was not
     returned.
     """
+    headers = {'accept': 'application/json',
+               'Content-Type': 'application/json'}
+
     if method == 'GET':
-        get_request = requests.get(url)
-        return get_request
+        response = requests.get(url=url)
+        return response
     elif method == 'POST':
-        if body == 'null':
-            print('POST Requests expect a body, body parameter cannot be null')
-            return 'FAILED'
-        else:
-            post_request = requests.post(url, data=body)
-            return post_request
+        response = requests.post(url=url, data=body, headers=headers)
+        return response
+    elif method == 'PUT':
+        response=requests.put(url=url, data=body, headers=headers)
+        return response
     else:
         print(f'{method} has not been defined')
         return 'FAILED'
@@ -79,8 +81,11 @@ def step_impl(context, ip_address, port, endpoint):
     method = context.active_outline[3]
     body = context.active_outline[4]
     print(f'method: {method}, IP: {ip_address}, port: {port}, endpoint: {endpoint}, body: {body}')
-    context.cmd = request(method, f'http://{ip_address}:{port}/{endpoint}', body)
+
+    url="http://" + ip_address + ":" + port + "/"+ endpoint
+    context.cmd = request(method, url, body)
     print(context.cmd)
+
     assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
 
 
