@@ -2,6 +2,7 @@ from behave import *
 from asserts import assert_true, assert_equal, assert_raises, assert_not_equal
 import subprocess
 import requests
+import json
 
 
 def os_cmd(command):
@@ -9,7 +10,7 @@ def os_cmd(command):
     return p.decode("utf-8")
 
 
-def request(method, url, body=None,headers=None):
+def request(method, url, body=None, headers=None):
     """
     :param method: Should be equal to 'GET' or 'POST'
     :param url: The url that will be called
@@ -18,17 +19,17 @@ def request(method, url, body=None,headers=None):
     a 'POST' request this function will return a string 'FAILED'. In your test step should assert that 'FAILED' was not
     returned.
     """
-    headers = {'accept': 'application/json',
-               'Content-Type': 'application/json'}
+    # headers = {'accept': 'application/json',
+    #            'Content-Type': 'application/json'}
 
     if method == 'GET':
         response = requests.get(url=url)
         return response
     elif method == 'POST':
-        response = requests.post(url=url, data=body, headers=headers)
+        response = requests.post(url=url, data=body, headers=json.loads(headers))
         return response
     elif method == 'PUT':
-        response=requests.put(url=url, data=body, headers=headers)
+        response = requests.put(url=url, data=body, headers=json.loads(headers))
         return response
     else:
         print(f'{method} has not been defined')
@@ -45,6 +46,9 @@ def step_impl(context):
     """
     cmd = os_cmd('docker ps')
     print(cmd)
+    print(type(cmd))
+    # assert_not_equal('CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES', str(cmd), msg_fmt='No Containers Found')
+    assert_true('cdr' in cmd, msg_fmt='No cdr Containers running')
     # Verify contents of 'docker ps' output
 
 
@@ -80,12 +84,13 @@ def step_impl(context, ip_address, port, endpoint):
     """
     method = context.active_outline[3]
     body = context.active_outline[4]
-    print(f'method: {method}, IP: {ip_address}, port: {port}, endpoint: {endpoint}, body: {body}')
-
-    url="http://" + ip_address + ":" + port + "/"+ endpoint
-    context.cmd = request(method, url, body)
+    headers = context.active_outline[6]
+    # headers = list(context.active_outline[6].split(","))
+    print(f'method: {method}, IP: {ip_address}, port: {port}, endpoint: {endpoint}, body: {body}, headers: {headers}')
+    url = f"http://{ip_address}:{port}/{endpoint}"
+    context.cmd = request(method=method, url=url, body=body, headers=headers)
     print(context.cmd)
-
+    print(context.cmd.text)
     assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
 
 
@@ -101,7 +106,7 @@ def step_impl(context):
     print(f'method: {method}, IP: {ip}, port: {port}, endpoint: {endpoint}')
     context.cmd = request(method, f'http://{ip}:{port}/{endpoint}', 'null')
     assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
-    #Add assertion here to chack value of IP address(es)
+    # Add assertion here to chack value of IP address(es)
 
 
 @step("the user has already run load files")
@@ -116,7 +121,7 @@ def step_impl(context):
     print(f'method: {method}, IP: {ip}, port: {port}, endpoint: {endpoint}')
     context.cmd = request(method, f'http://{ip}:{port}/{endpoint}', 'null')
     assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
-    #assert response headers are as expected
+    # assert response headers are as expected
 
 
 @then("the user should receive a response showing the processing status")
@@ -129,4 +134,33 @@ def step_impl(context):
     assert_equal(expected_code, str(context.cmd.status_code),
                  msg_fmt=f'Expected {expected_code} actual is {context.cmd.status_code}')
     print(context.cmd.text)
-    #Add assertion on response body
+    # Add assertion on response body
+
+
+@then("the user should receive a (?P<expected_code>.+)")
+def step_impl(context, expected_code):
+    """
+    :type context: behave.runner.Context
+    :type expected_code: str
+    """
+    print(context.cmd.status_code)
+    assert_equal(expected_code, str(context.cmd.status_code),
+                 msg_fmt=f'Expected {expected_code} actual is {context.cmd.status_code}')
+
+
+@step("showing the processing status")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    print(context.cmd.text)
+    assert_true('"current_status":"Stopped"' in context.cmd.text, msg_fmt='Expected Value not found')
+
+
+@step("the user should be able to see SDK IP set with provided IP list")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    print(context.cmd.text)
+    assert_equal(context.active_outline[4].replace(" ",""), str(context.cmd.text))
