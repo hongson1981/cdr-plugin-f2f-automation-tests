@@ -19,18 +19,18 @@ Feature: Folder to Folder Base State
   Scenario Outline: can view Processing Status
     Given that docker compose is up and running
     When the Endpoint http://<ip_address>:<port>/<endpoint> is called
-    Then the user should receive a response showing the processing status
+    Then the user should receive a <expected_code> showing the processing status
     Examples:
         | ip_address | port | endpoint          | method | body | expected_code |
-        | 127.0.0.1  | 8880 | processing/status | GET    | null | 200           |
+        | 127.0.0.1  | 8880 | processing/status | GET    | None | 200           |
 
   Scenario Outline: User can Set IPs
     Given that docker compose is up and running
     When the Endpoint http://<ip_address>:<port>/<endpoint> is called
-    Then the user should be able to see SDK IP set with provided IP list
+    Then the user should be able to see SDK IP set with provided IP list <expected_code>
     Examples:
-        | ip_address | port | endpoint | method | body |
-        | 127.0.0.1  | 8880 | configuration/configure_multiple_gw_sdk_endpoints | POST | { 'Endpoints': [{ 'IP': '127.0.0.1', 'Port': 8080' }]} |
+        | ip_address | port | endpoint | method | body | expected_code |
+        | 127.0.0.1  | 8880 | configuration/configure_gw_sdk_endpoints | POST | { "Endpoints": [{ "IP": "gw-cloud-sdk-455649808.eu-west-1.elb.amazonaws.com", "Port": "8080" }]} | 200           |
 
   Scenario Outline: User can Map Base Directory
     Given that docker compose is up and running
@@ -40,7 +40,7 @@ Feature: Folder to Folder Base State
     And mapped directory contains hd1, hd2 and hd3
     Examples:
       | ip_address   | port   | endpoint   | method | body |
-      | 127.0.0.1 | 8880 | configuration/config/ | POST | {  } |
+      | 127.0.0.1 | 8880 | configuration/config/ | GET | {  } |
 
   Scenario Outline: User can Load Files for Processing
     Given that docker compose is up and running
