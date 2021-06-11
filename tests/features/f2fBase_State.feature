@@ -12,7 +12,7 @@ Feature: Folder to Folder Base State
         | 8880 | Swagger   | 200          |
         | 5601 | Kibana    | 200          |
         | 9000 | Minio     | 403          |
-        | 1313 | UI        | 200          |
+        | 8700 | UI        | 200          |
         | 8888 | Jupyter   | 200          |
         | 8866 | Voila     | 200          |
         | 9200 | Elastic   | 200          |
@@ -23,8 +23,8 @@ Feature: Folder to Folder Base State
     Then the user should receive a <expected_code>
     And showing the processing status
     Examples:
-        | ip_address | port | endpoint          | method | body | expected_code | headers |
-        | 127.0.0.1  | 8880 | processing/status | GET    | None | 200           | None    |
+        | ip_address | port | endpoint          | method | body | expected_code | headers | expected_message |
+        | 127.0.0.1  | 8880 | processing/status | GET    | None | 200           | None    | "current_status":"None" |
 
   Scenario Outline: User can Set IPs
     Given that docker compose is up and running
@@ -41,22 +41,21 @@ Feature: Folder to Folder Base State
     When the Endpoint http://<ip_address>:<port>/<endpoint> is called
     Then the user should receive a <expected_code>
     And the user should see a response showing the base directory matches the user input
-    And mapped directory contains hd1, hd2 and hd3
+#    And mapped directory contains hd1, hd2 and hd3
     Examples:
-      | ip_address   | port   | endpoint   | method | body | expected_code | headers |
-      | 127.0.0.1 | 8880 | configuration/configure_env/ | POST | { "hd1_path": "./test_data/scenario-2/hd1","hd2_path": "./test_data/scenario-2/hd2","hd3_path": "./test_data/scenario-2/hd3"} | 200 | {"accept": "application/json","Content-Type": "application/json"} |
+      | ip_address   | port   | endpoint   | method | body | expected_code | headers | expected_ip |
+      | 127.0.0.1 | 8880 | configuration/configure_env/ | POST | { "hd1_path": "./test_data/scenario-2/hd1","hd2_path": "./test_data/scenario-2/hd2","hd3_path": "./test_data/scenario-2/hd3"} | 200 | {"accept": "application/json","Content-Type": "application/json"} | "gw-cloud-sdk-455649808.eu-west-1.elb.amazonaws.com" |
 
   Scenario Outline: User can Load Files for Processing
     Given that docker compose is up and running
     And sdk-ip is set
     When the Endpoint http://<ip_address>:<port>/<endpoint> is called
     Then the user should receive a <expected_code>
-    And the user will see response "All files Loaded"
-    And the user can see the files in HD2/data/to-do
-    And the user can see the files in {path}hd2/to-do
+    And the user will see response Confirming the files are loaded
+    And the user can see the files show as copied in processing status
     Examples:
-      | ip_address   | port   | endpoint   | method | body | expected_code | headers |
-      | 127.0.0.1 | 8880 | pre-processor/pre-process?thread_count=10 | POST |  | 200 | {"accept": "application/json"} |
+      | ip_address   | port   | endpoint   | method | body | expected_code | headers | expected_ip | expected_message |
+      | 127.0.0.1 | 8880 | pre-processor/pre-process?thread_count=10 | POST |  | 200 | {"accept": "application/json"} | "gw-cloud-sdk-455649808.eu-west-1.elb.amazonaws.com" | "Processing is done" |
 
   Scenario Outline: User can Process Files
     Given that docker compose is up and running
@@ -67,5 +66,5 @@ Feature: Folder to Folder Base State
     And the user should be able to see the output confirming "Loop Completed"
     And the user should see the HD3 with processed files
     Examples:
-      | ip_address   | port   | endpoint   | method        | body | expected_code | headers |
-      | 127.0.0.1 | 8880 | processing/start?thread_count=10 | POST |  | 200 | {"accept": "application/json"} |
+      | ip_address   | port   | endpoint   | method        | body | expected_code | headers | expected_ip | expected_message |
+      | 127.0.0.1 | 8880 | processing/start?thread_count=10 | POST |  | 200 | {"accept": "application/json"} | "gw-cloud-sdk-455649808.eu-west-1.elb.amazonaws.com" | "Loop completed" |
