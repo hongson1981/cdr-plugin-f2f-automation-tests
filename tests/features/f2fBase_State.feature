@@ -12,7 +12,7 @@ Feature: Folder to Folder Base State
         | 8880 | Swagger   | 200          |
         | 5601 | Kibana    | 200          |
         | 9000 | Minio     | 403          |
-        | 8700 | UI        | 200          |
+        | 1313 | UI        | 200          |
         | 8888 | Jupyter   | 200          |
         | 8866 | Voila     | 200          |
         | 9200 | Elastic   | 200          |
