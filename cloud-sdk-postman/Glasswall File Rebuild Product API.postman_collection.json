@@ -1,0 +1,5405 @@
+{
+	"info": {
+		"_postman_id": "46ee6c31-eb39-477a-bdd7-f4c1351df65e",
+		"name": "Glasswall File Rebuild Product API",
+		"description": "The Rebuild API provides developers the pathway to obtaining safe and secure files.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "rebuild",
+					"item": [
+						{
+							"name": "Rebuilds a file using its binary data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should rebuild binary file\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"contentType": "",
+											"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_FILE_PATH}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/rebuild/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"rebuild",
+										"file"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to rebuild a file with the Glasswall Engine. File is sent in the request body with a 'Content-Type' of 'multipart/form-data'. The Rebuilt file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "OK - The requested file was processed by the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"file"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.pdf; filename*=UTF-8''ExampleFileName.pdf",
+											"description": "This contains the details of the rebuilt files binary data to download."
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"file"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"file"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"file"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"file"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Rebuilds a file using the Base64 encoded representation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should rebuild file encoded as base64\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"{{TEST_FILE_BASE64}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/rebuild/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"rebuild",
+										"base64"
+									]
+								},
+								"description": "This endpoint accepts requests to rebuild a file with the Glasswall Engine. The request body contains the Base64 representation of the file with a 'Content-Type' of 'application/json'.  A Base64 Representation of the rebuilt file is then returned in the response with a 'Content-Type' of 'text/plain'. <br/><br/> <span><input id=\"base64Input\" type=\"file\"></input>        \n"
+							},
+							"response": [
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"base64"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Bad Request - This is usually when the JSON input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"base64"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "OK - The requested Base64 was successfully decoded and processed by the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"base64"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": "0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAUgAAAAAAAAAAEAAAAAAAAAEAAAD+////AAAAAFMAAAD//////////////////////////////..."
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"base64"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"base64"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Rebuilds a zip file using its binary data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should rebuild zip file\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_ZIP_PATH}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/rebuild/zipfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"rebuild",
+										"zipfile"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to rebuild a zip file with the Glasswall Engine. The file is sent in the request body with a 'Content-Type' of 'multipart/form-data'. Rebuilt zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "OK - The requested file was processed by the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.pdf; filename*=UTF-8''ExampleFileName.pdf",
+											"description": "This contains the details of the rebuilt files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Multi-Status - The requested file was processed with error report by the Glasswall Engine.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "Multi-Status (WebDAV) (RFC 4918)",
+									"code": 207,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.pdf; filename*=UTF-8''ExampleFileName.pdf",
+											"description": "This contains the details of the rebuilt files and ErrorHtml binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or all the files in zip are unprocessable by SDK Engine or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected zip file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/zipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"zipfile"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Rebuilds a protected zip file using its binary data and password.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should rebuild password protected zip file\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_ZIP_PROTECTED_PATH}}"
+										},
+										{
+											"key": "password",
+											"value": "{{TEST_ZIP_PROTECTED_PASSWORD}}",
+											"description": "(Required) Password for the protected zip file.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"rebuild",
+										"protectedzipfile"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to rebuild a protected zip file with the Glasswall Engine. Both protected file and password are sent in the request body with a 'Content-Type' of 'multipart/form-data'. Rebuilt zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) Password for the protected zip file.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"protectedzipfile"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "OK - The requested file was processed by the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) Password for the protected zip file.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"protectedzipfile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.zip; filename*=UTF-8''ExampleFileName.zip",
+											"description": "This contains the details of the rebuilt files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) Password for the protected zip file.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"protectedzipfile"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) Password for the protected zip file.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"protectedzipfile"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the rebuilt file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected protected zip file will be uploaded to the server.",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "<string>",
+													"description": "(Required) Password for the protected zip file.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/rebuild/protectedzipfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"rebuild",
+												"protectedzipfile"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "analyse",
+					"item": [
+						{
+							"name": "Analyse a file using the Base64 encoded representation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should analyse file encoded as base64 and return report.xml\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"{{TEST_FILE_BASE64}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/analyse/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"analyse",
+										"base64"
+									]
+								},
+								"description": "This endpoint accepts requests to rebuild a file with the Glasswall Engine. The request body contains the Base64 representation of the file with a 'Content-Type' of 'application/json'.  The Report file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'. <br/><br/> <span><input id=\"base64Input\" type=\"file\"></input> \n"
+							},
+							"response": [
+								{
+									"name": "Bad Request - This is usually when the JSON input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								},
+								{
+									"name": "OK - The requested file was processed by the the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.pdf; filename*=UTF-8''ExampleFileName.pdf",
+											"description": "This contains the details of the report xml file binary data to download."
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"base64"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Analyse a file using it's binary data.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should analyse binary file and return report.xml\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_FILE_PATH}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/analyse/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"analyse",
+										"file"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to analyse a file with Glasswall Engine. File is sent in the request body with a 'Content-Type' of 'multipart/form-data'. The Report file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "OK - The requested file was processed by the Glasswall Engine",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=ExampleFileName.pdf; filename*=UTF-8''ExampleFileName.pdf",
+											"description": "This contains the details of the report xml file binary data to download."
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the JSON input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"file"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Returns a zip file with all available data using the Base64 encoded representation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should analyse file encoded as base64 and return rebuild file and report.xml as zip\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.response.headers.get('X-Adaptation-File-Id')",
+											"pm.environment.set(\"FILE_ID\", pm.response.headers.get('X-Adaptation-File-Id'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"{{TEST_FILE_BASE64}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"analyse",
+										"rebuild-zip-from-base64"
+									]
+								},
+								"description": "This endpoint accepts requests to fetch all the available data that is processed by the Glasswall Engine. The request body contains the Base64 representation of the file with a 'Content-Type' of 'application/json'.  The zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'. <br/><br/> <span><input id=\"base64Input\" type=\"file\"></input> \n"
+							},
+							"response": [
+								{
+									"name": "OK - The request was processed by the Glasswall Engine and the zip file's binary content is returned to the client.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=475df7aa-9739-4b7d-929e-40e625c14581.zip; filename*=UTF-8''475df7aa-9739-4b7d-929e-40e625c14581.zip",
+											"description": "This contains the details of the xml report files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Returns a xml report file using its FileId.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should fetch xml report using fileId\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId={{FILE_ID}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"analyse",
+										"xmlreport"
+									],
+									"query": [
+										{
+											"key": "fileId",
+											"value": "{{FILE_ID}}",
+											"description": "(Required) A value of 'FileId', based on will return the xml report file's binary content to the client."
+										}
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts FileId to fetch the xml report."
+							},
+							"response": [
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "OK - The request was processed by the Glasswall Engine and the xml report file's binary content is returned to the client.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=report.xml; filename*=UTF-8''report.xml",
+											"description": "This contains the details of the xml report files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the xml report file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/xmlreport?fileId=475df7aa-9739-4b7d-929e-40e625c14581",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"xmlreport"
+											],
+											"query": [
+												{
+													"key": "fileId",
+													"value": "475df7aa-9739-4b7d-929e-40e625c14581"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Returns a zip file with all available data using its binary data.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should analyse binary file and return rebuild file and report.xml as zip\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_FILE_PATH}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"analyse",
+										"rebuild-zip-from-file"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to return all available data corresponding to a input file processed by the Glasswall Engine. File is sent in the request body with a 'Content-Type' of 'multipart/form-data'. The zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "OK - The request was processed by the the Glasswall Engine and the zip file's binary content is returned to the client.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=475df7aa-9739-4b7d-929e-40e625c14581.zip; filename*=UTF-8''475df7aa-9739-4b7d-929e-40e625c14581.zip",
+											"description": "This contains the details of the xml report files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/analyse/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"analyse",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "SDK",
+					"item": [
+						{
+							"name": "Returns a zip file with all available data using the Base64 encoded representation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Rebuild zip from base64\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"{{TEST_FILE_BASE64}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"SDK",
+										"rebuild-zip-from-base64"
+									]
+								},
+								"description": "This endpoint accepts requests to fetch all the available data that is processed by the Glasswall Engine. The request body contains the Base64 representation of the file with a 'Content-Type' of 'application/json'.  The zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'. <br/><br/> <span><input id=\"base64Input\" type=\"file\"></input> \n"
+							},
+							"response": [
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "OK - The request was processed by the Glasswall Engine and the zip file's binary content is returned to the client.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=475df7aa-9739-4b7d-929e-40e625c14581.zip; filename*=UTF-8''475df7aa-9739-4b7d-929e-40e625c14581.zip",
+											"description": "This contains the details of the xml report files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Base64\": \"<string>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-base64",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-base64"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Returns a zip file with all available data using its binary data.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Rebuild zip from binary file\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+											"type": "file",
+											"src": "{{TEST_FILE_PATH}}"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"SDK",
+										"rebuild-zip-from-file"
+									]
+								},
+								"description": "<h3>Description:</h3>This endpoint accepts requests to return all available data corresponding to a input file processed by the Glasswall Engine. File is sent in the request body with a 'Content-Type' of 'multipart/form-data'. The zip file is then returned in the response body with a 'Content-Type' of 'application/octet-stream'."
+							},
+							"response": [
+								{
+									"name": "Not Found - This is usually when the required return data is missing on server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+								},
+								{
+									"name": "Internal Server Error - This is usually when something wrong on the server.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"eu mollit ullamco\",\n  \"qui magna sit\"\n ],\n \"status\": \"null\",\n \"rebuildProcessingStatus\": \"null\"\n}"
+								},
+								{
+									"name": "OK - The request was processed by the Glasswall Engine and the zip file's binary content is returned to the client.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Disposition",
+											"value": "attachment; filename=475df7aa-9739-4b7d-929e-40e625c14581.zip; filename*=UTF-8''475df7aa-9739-4b7d-929e-40e625c14581.zip",
+											"description": "This contains the details of the xml report files binary data to download"
+										},
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "X-Adaptation-File-Id",
+											"value": "incididun",
+											"description": "Adaptation file id."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/octet-stream"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Method Not Allowed",
+									"code": 405,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request - This is usually when the input is malformed or missing parameters",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+								},
+								{
+									"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											},
+											{
+												"description": "A value of 'application/octet-stream' will return the zip file's binary content to the client.",
+												"key": "Accept",
+												"value": "application/octet-stream"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<binary>",
+													"description": "(Required) The binary contents of the selected file will be uploaded to the server.",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/SDK/rebuild-zip-from-file",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"SDK",
+												"rebuild-zip-from-file"
+											]
+										}
+									},
+									"status": "Unsupported Media Type",
+									"code": 415,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Via",
+											"value": "incididun",
+											"description": "Name of the machine which processed the request."
+										},
+										{
+											"key": "X-SDK-Engine-Version",
+											"value": "incididun",
+											"description": "Version of the GW SDK Engine."
+										},
+										{
+											"key": "X-SDK-Api-Version",
+											"value": "incididun",
+											"description": "Version of the Cloud SDK Api."
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Returns 200 status code.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Health Check should be OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql('OK');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						},
+						"description": "<h3>Description:</h3>This endpoint is to check the health of the system."
+					},
+					"response": [
+						{
+							"name": "Internal Server Error - This is usually when something wrong on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"health"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"health"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"health"
+									]
+								}
+							},
+							"status": "Unsupported Media Type",
+							"code": 415,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK - The request was processed successfully and service is up and running.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"status\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Detect a file type and other information using the Base64 encoded representation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"File type detection should work\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Base64\": \"{{TEST_FILE_BASE64}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/filetypedetection/base64",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"filetypedetection",
+								"base64"
+							]
+						},
+						"description": "This endpoint accepts requests to rebuild a file with the Glasswall Engine. The request body contains the Base64 representation of the file with a 'Content-Type' of 'application/json'.  File information then returned in the response body with a 'Content-Type' of 'application/json'. <br/><br/> <span><input id=\"base64Input\" type=\"file\"></input> \n"
+					},
+					"response": [
+						{
+							"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "Unsupported Media Type",
+							"code": 415,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error - This is usually when something wrong on the server.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  \"GW_FAILED\",\n  \"GW_UNPROCESSED\"\n ]\n}"
+						},
+						{
+							"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK - The requested file was processed by the the Glasswall Engine",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "X-Adaptation-File-Id",
+									"value": "incididun",
+									"description": "Adaptation file id."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"fileTypeName\": \"laborum in tempor velit\",\n \"fileSize\": 74937041.76334223\n}"
+						},
+						{
+							"name": "Not Found - This is usually when the required return data is missing on server.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  \"anim commodo qui eiusmod\",\n  \"minim incididunt\"\n ],\n \"status\": \"GW_ERROR\",\n \"rebuildProcessingStatus\": \"UNPROCESSABLE\"\n}"
+						},
+						{
+							"name": "Bad Request - This is usually when the JSON input is malformed or missing parameters",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Base64\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/filetypedetection/base64",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"filetypedetection",
+										"base64"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  \"ea in adipisicing in laborum\",\n  \"quis occaecat ex cupidatat\"\n ],\n \"status\": \"GW_UNPROCESSED\",\n \"rebuildProcessingStatus\": \"EXPIRED\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Returns versions of api and SDK Engine.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns proper SDK Version Info\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.text()).to.include(\"sdkEngineVersion\");",
+									"    pm.expect(pm.response.text()).to.include(\"sdkApiVersion\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/detail/version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"detail",
+								"version"
+							]
+						},
+						"description": "<h3>Description:</h3>This endpoint is to return the version of api and SDK Engine."
+					},
+					"response": [
+						{
+							"name": "Internal Server Error - This is usually when something wrong on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/detail/version",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"detail",
+										"version"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Method Not Allowed - This happens when an HTTP method is not allowed by a server for a requested URL.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/detail/version",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"detail",
+										"version"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK - The request was processed successfully and return the versions.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/detail/version",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"detail",
+										"version"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"sdkEngineVersion\": \"deserunt occaecat quis\",\n \"sdkApiVersion\": \"sunt Lorem sed\"\n}"
+						},
+						{
+							"name": "Unsupported Media Type - This happens when the payload format is in an unsupported format. The format problem might be due to the request's indicated Content-Type.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/detail/version",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"detail",
+										"version"
+									]
+								}
+							},
+							"status": "Unsupported Media Type",
+							"code": 415,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Via",
+									"value": "incididun",
+									"description": "Name of the machine which processed the request."
+								},
+								{
+									"key": "X-SDK-Engine-Version",
+									"value": "incididun",
+									"description": "Version of the GW SDK Engine."
+								},
+								{
+									"key": "X-SDK-Api-Version",
+									"value": "incididun",
+									"description": "Version of the Cloud SDK Api."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "<Bearer Token>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
