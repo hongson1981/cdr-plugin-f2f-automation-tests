@@ -97,7 +97,7 @@ def step_impl(context, ip_address, port, endpoint):
     assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
 
 
-@step("sdk-ip is set")
+@given("sdk-ip is set")
 def step_impl(context):
     """
     :type context: behave.runner.Context
@@ -235,3 +235,12 @@ def step_impl(context):
     print(context.cmd.text)
     status_items = list(context.cmd.text.split(","))
     assert_true(status_items[6].split(":")[1] == '0', msg_fmt=f'Expected files left to process 0. Actual {status_items[6].split(":")[1]}')
+
+
+@step("the HD2 status is clear")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    context.cmd = request("POST", f'http://{context.ip}:{context.port}/pre-processor/clear-data-and-status', 'null')
+    assert_not_equal('FAILED', str(context.cmd), msg_fmt='request method returned FAILED')
