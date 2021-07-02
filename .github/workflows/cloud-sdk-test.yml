@@ -1,0 +1,33 @@
+name: Cloud SDK API Postman Runner
+on:
+  workflow_dispatch:
+    inputs:
+      cloud_sdk_url:
+        default: http://localhost:8080
+        description: Complete CloudSDK URL with port (should not have / at the end)
+        required: true
+jobs:
+  cloud-sdk-api-test:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # INstall Node on the runner
+    - name: Install Node
+      uses: actions/setup-node@v1
+
+    # Install the newman command line utility and also install the html extra reporter
+    - name: Install newman
+      run: |
+       npm install -g newman
+
+    # Run the POSTMAN collection
+    - name: Run POSTMAN collection
+      run: |
+       newman run cloud-sdk-postman/gw-cloud-sdk-api.postman_collection.json -e cloud-sdk-postman/cloud-sdk.postman_environment.json --working-dir cloud-sdk-postman/test_files/ --env-var baseUrl=${{ github.event.inputs.cloud_sdk_url }} -r cli,junit -x
+    # Upload the contents of Test Results directory to workspace
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v2
+      with:
+        report_paths: '**/newman/*.xml'
