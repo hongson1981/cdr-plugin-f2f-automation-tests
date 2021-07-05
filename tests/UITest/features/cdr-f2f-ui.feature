@@ -34,7 +34,7 @@ Feature: Folder to Folder Plugin UI is Accessible and fully functional
 
   Scenario: User can set SDK IPs manually
     When the user click on configuration tab
-    And the user clic on Add button
+    And the user click on Add button
     And user enter IP and Port for Running SDK
     And the user click on "Set Plugin IPs"
     Then the user should be able to see pop-up confirming "Successfully set"
